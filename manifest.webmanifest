@@ -1,7 +1,7 @@
 {
   "name": "MH-RM",
   "short_name": "MH-RM",
-  "description": "Control de cobros de MH Construcciones y RM Pinturas",
+  "description": "Sistema de gestión de MH Construcciones y RM Pinturas",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
