@@ -4,7 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<title>Cobros MH · RM</title>
+<title>MH-RM</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#26272b">
+<meta name="application-name" content="MH-RM">
+<meta name="apple-mobile-web-app-title" content="MH-RM">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <style>
 :root{
   --bg:#f4f3f1; --card:#fff; --ink:#26272b; --muted:#6d6f76; --line:#e3e1dd;
@@ -158,6 +167,13 @@ tbody tr.clk{transition:background .12s}
 .mh{background:#faf9f7}
 .seg button{transition:background .15s}
 #btnNew{background:#fff;color:#26272b;border-color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.wa{color:#1f8a4c;border-color:#bfe3cc;background:#f2faf5}
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.recprev{display:flex;gap:16px;align-items:center;background:#f6f5f2;border-radius:12px;padding:14px 16px}
+.recprev img{height:54px;max-width:110px;object-fit:contain}
+.recmonto{font-size:22px;font-weight:800;margin:2px 0}
+#btnRecWa{background:#25a35a;border-color:#25a35a}
 @media(max-width:1380px) and (min-width:721px){.brand h1{display:none}.seg button{padding:6px 9px}nav button{padding:7px 11px}}
 .login{position:fixed;inset:0;background:#26272b;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px}
 .login.hide{display:none}
@@ -211,7 +227,8 @@ tbody tr.clk{transition:background .12s}
 .man .tip{background:var(--rm-soft);border-left:4px solid var(--rm);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:14px}
 .man .tip.warn{background:var(--warn-soft);border-left-color:var(--warn)}
 .man .ej{background:#f6f5f2;border-left:4px solid var(--mh);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:14px}
-.man dt{font-weight:700;margin-top:12px}.man dd{margin:3px 0 0;color:#45464c}
+.man dt{font-weight:700;margin-top:12px}
+.man .sub-h{font-size:15px;margin:18px 0 6px;color:var(--ok)}.man dd{margin:3px 0 0;color:#45464c}
 @media(max-width:720px){.man{padding:16px}.man article{scroll-margin-top:10px}nav button{font-size:13px}}
 @media print{header,.foot,.btn,.filters{display:none!important}body{background:#fff}.panel,.kpi{break-inside:avoid}}
 </style>
@@ -368,6 +385,12 @@ tbody tr.clk{transition:background .12s}
         <li>Opcionalmente, agregar una <b>nota</b> (por ejemplo: "seña", "2° pago", "banco Macro").</li>
         <li>Abajo se muestra cuánto <b>queda pendiente</b> después de este cobro. Tocar <b>Registrar cobro</b>.</li>
       </ol>
+      <h4 class="sub-h">Recibo en PDF por WhatsApp</h4>
+      <p>Al registrar un cobro se abre automáticamente la ventana del <b>recibo</b>. El recibo sale con el logo de <b>MH</b> o de <b>RM</b> según quién hizo el trabajo, numeración propia de cada empresa (MH-0001, RM-0001…), el importe en números y en letras, la forma de pago, la cotización si corresponde y el saldo que queda del trabajo.</p>
+      <ul><li><b>Enviar por WhatsApp</b>: abre el menú para compartir del celular; elegir WhatsApp y el chat del cliente. El PDF se adjunta solo.</li>
+      <li><b>Descargar PDF</b>: guarda el recibo en el dispositivo (para imprimirlo o mandarlo por mail).</li>
+      <li>Para volver a generar el recibo de un cobro anterior: abrir el trabajo y tocar <b>Recibo</b> en el cobro. Conserva siempre el mismo número.</li></ul>
+      <div class="tip">En la computadora, si el navegador no permite compartir archivos, el PDF se descarga y se abre WhatsApp Web con un mensaje listo: solo hay que adjuntar el archivo descargado.</div>
       <p>Un trabajo puede tener <b>todos los cobros que hagan falta</b> (seña, pagos parciales, saldo final). Cuando el pendiente llega a cero, el trabajo pasa a estado <b>Cobrado</b> y sale de la lista de pendientes.</p>
     </article>
 
@@ -439,7 +462,7 @@ tbody tr.clk{transition:background .12s}
 
     <article id="m13"><h3><span class="hic"><i data-ic="phone"></i></span>13. Uso en el celular</h3>
       <p>El sistema se adapta a la pantalla del celular: las tablas se muestran como tarjetas y el botón <b>+ Nuevo trabajo</b> queda flotando abajo a la derecha.</p>
-      <p>Para tenerlo como una app en la pantalla de inicio:</p>
+      <p>Para tenerlo como una app en la pantalla de inicio (aparece como <b>MH-RM</b>, con el ícono de las dos empresas):</p>
       <ul>
         <li><b>Android (Chrome)</b>: abrir el link, tocar el menú <b>⋮</b> y elegir <b>Agregar a pantalla principal</b>.</li>
         <li><b>iPhone (Safari)</b>: abrir el link, tocar <b>Compartir</b> y elegir <b>Agregar a inicio</b>.</li>
@@ -506,6 +529,13 @@ tbody tr.clk{transition:background .12s}
     </div>
   </div>
   <div class="mf"><button class="btn" onclick="cerrar('ovCob')">Cancelar</button><button class="btn green" onclick="guardarCobro()"><i data-ic="check"></i>Registrar cobro</button></div>
+</div></div>
+
+<!-- MODAL RECIBO -->
+<div class="ov" id="ovRec"><div class="modal">
+  <div class="mh"><h3 id="recTit">Recibo de cobro</h3><button class="x" onclick="cerrar('ovRec')">×</button></div>
+  <div class="mb" id="recInfo"></div>
+  <div class="mf"><button class="btn" onclick="cerrar('ovRec')">Cerrar</button><button class="btn" id="btnRecDes" onclick="descargarRecibo()"><i data-ic="download"></i>Descargar PDF</button><button class="btn green" id="btnRecWa" onclick="enviarRecibo()"><i data-ic="wa"></i>Enviar por WhatsApp</button></div>
 </div></div>
 
 <!-- MODAL DETALLE -->
@@ -587,6 +617,7 @@ building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4
 info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
 login:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/>',
 spark:'<path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/>',
+wa:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 10c.5 2 2.5 4 5 5l1.2-1.2 2 .9-.4 1.6c-3.5.5-8.4-4.4-7.9-7.9l1.6-.4.9 2z"/>',
 inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'
 };
 const I=(n,c='')=>`<svg class="ic ${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICP[n]||''}</svg>`;
@@ -739,9 +770,101 @@ function guardarCobro(){
   const t=DB.trabajos.find(x=>x.id===cobId);const m=num($('cMonto').value),mon=rv('cMon'),cot=num($('cCot').value);
   if(m<=0)return toast('Cargá el monto cobrado'); if(mon!==t.moneda&&cot<=0)return toast('Falta la cotización del dólar');
   t.cobros.push({id:uid(),ts:Date.now(),usuario:USUARIO,fecha:$('cFecha').value||hoy(),medio:rv('cMed'),moneda:mon,monto:m,cot:mon!==t.moneda?cot:null,nota:$('cNota').value.trim()});
-  save(t);cerrar('ovCob');render();const c=calc(t);toast(c.pend>0?`Cobro registrado · quedan ${fmt(c.pend,t.moneda)}`:'Cobro registrado · trabajo cancelado ✓');
+  const nuevo=t.cobros[t.cobros.length-1];save(t);cerrar('ovCob');render();const c=calc(t);toast(c.pend>0?`Cobro registrado · quedan ${fmt(c.pend,t.moneda)}`:'Cobro registrado · trabajo cancelado ✓');
+  abrirRecibo(t.id,nuevo.id,true);
 }
 function borrarCobro(tid,cid){const t=DB.trabajos.find(x=>x.id===tid);if(!confirm('¿Eliminar este cobro?'))return;t.cobros=t.cobros.filter(c=>c.id!==cid);save(t);render();verDetalle(tid);toast('Cobro eliminado')}
+
+
+/* ---------- RECIBOS PDF ---------- */
+const COLOR={MH:[198,42,50],RM:[36,113,184]};
+const EMPLEG={MH:'MH Construcciones  ·  Tel. 3493-459714',RM:''};
+function apoc(s){return s.replace(/veintiuno$/,'veintiún').replace(/uno$/,'un')}
+function letras(n){
+  const U=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+  const D=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+  const C=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+  const c999=x=>{if(!x)return'';if(x===100)return'cien';const r=x%100;const t=r<30?U[r]:D[Math.floor(r/10)]+(r%10?' y '+U[r%10]:'');return(C[Math.floor(x/100)]+' '+t).trim()};
+  if(n===0)return'cero';
+  const mm=Math.floor(n/1e6),m=Math.floor(n%1e6/1000),r=n%1000;let o='';
+  if(mm)o+=mm===1?'un millón':apoc(letras(mm))+' millones';
+  if(m)o+=' '+(m===1?'mil':apoc(c999(m))+' mil');
+  if(r)o+=' '+c999(r);
+  return o.trim()}
+function sumaEnLetras(v,mon){const e=Math.floor(Math.round(v*100)/100),c=Math.round((v-e)*100);
+  const txt=apoc(letras(e));const nom=mon==='USD'?(e===1?'dólar estadounidense':'dólares estadounidenses'):(e===1?'peso':'pesos');
+  return (txt+' '+(e>=1e6&&e%1e6===0?'de ':'')+nom+(c?` con ${String(c).padStart(2,'0')}/100`:'')).replace(/^./,x=>x.toUpperCase())}
+function cargarJsPDF(){if(window.jspdf)return Promise.resolve();return new Promise((ok,ko)=>{const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';s.onload=ok;s.onerror=()=>ko(new Error('No se pudo cargar el generador de PDF. Revisá la conexión.'));document.head.appendChild(s)})}
+function medidas(src){return new Promise(ok=>{const i=new Image();i.onload=()=>ok([i.naturalWidth,i.naturalHeight]);i.onerror=()=>ok([2,1]);i.src=src})}
+function asignarNro(t,c){if(c.nroRecibo)return c.nroRecibo;let max=0;
+  DB.trabajos.filter(x=>x.empresa===t.empresa).forEach(x=>(x.cobros||[]).forEach(y=>{if((y.nroRecibo||0)>max)max=y.nroRecibo}));
+  c.nroRecibo=max+1;save(t);return c.nroRecibo}
+function saldoAl(t,c){const ord=[...t.cobros].sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||'')||(a.ts||0)-(b.ts||0));
+  let acum=0;for(const x of ord){acum+=imputado(x,t.moneda);if(x.id===c.id)break}return{cobrado:acum,saldo:Math.max(t.monto-acum,0)}}
+async function generarRecibo(t,c){
+  await cargarJsPDF();const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:'mm',format:'a5'});
+  const nro=asignarNro(t,c),N=String(nro).padStart(4,'0'),col=COLOR[t.empresa],W=148,M=12;
+  const gris=[110,111,118],tinta=[38,39,43];
+  const [lw,lh]=await medidas(LOGO[t.empresa]);let h=24,w=h*lw/lh;if(w>58){w=58;h=w*lh/lw}
+  doc.addImage(LOGO[t.empresa],'PNG',M,11,w,h);
+  doc.setFont('helvetica','bold');doc.setTextColor(...tinta);doc.setFontSize(21);doc.text('RECIBO',W-M,19,{align:'right'});
+  doc.setTextColor(...col);doc.setFontSize(13);doc.text(`N° ${t.empresa}-${N}`,W-M,26,{align:'right'});
+  doc.setFont('helvetica','normal');doc.setTextColor(...gris);doc.setFontSize(9.5);
+  const [a,mm,d]=(c.fecha||hoy()).split('-');doc.text(`Fecha: ${d}/${mm}/${a}`,W-M,32,{align:'right'});
+  doc.setFontSize(8.5);doc.text(EMPLEG[t.empresa],M,41);
+  doc.setDrawColor(...col);doc.setLineWidth(0.9);doc.line(M,44,W-M,44);
+  let y=53;
+  const campo=(lab,val)=>{doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(...gris);doc.text(lab.toUpperCase(),M,y);
+    doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...tinta);const ls=doc.splitTextToSize(val||'—',W-2*M);doc.text(ls,M,y+5);
+    y+=5+ls.length*4.6+3.5};
+  campo('Recibí de',t.cliente);
+  campo('La suma de',sumaEnLetras(c.monto,c.moneda));
+  campo('En concepto de',(t.obra||'Trabajo realizado')+(t.facturado&&t.nroFactura?`  ·  Factura N° ${t.nroFactura}`:''));
+  campo('Forma de pago',c.medio+(c.nota?`  ·  ${c.nota}`:''));
+  if(c.cot)campo('Cotización del dólar',`US$ 1 = ${fmt(c.cot,'ARS')}  ·  Equivale a ${fmt(imputado(c,t.moneda),t.moneda)}`);
+  // importe
+  y+=1;doc.setFillColor(...col.map(v=>Math.round(v+(255-v)*0.88)));doc.setDrawColor(...col);doc.setLineWidth(0.6);
+  doc.roundedRect(M,y,W-2*M,16,2.5,2.5,'FD');
+  doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...col);doc.text('IMPORTE RECIBIDO',M+5,y+6.3);
+  doc.setFontSize(17);doc.setTextColor(...tinta);doc.text(fmt(c.monto,c.moneda),W-M-5,y+10.8,{align:'right'});
+  y+=24;
+  // estado de cuenta
+  const st=saldoAl(t,c);const cw=(W-2*M)/3;
+  doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(...gris);doc.text('ESTADO DE CUENTA DEL TRABAJO',M,y);y+=3;
+  doc.setDrawColor(225,223,219);doc.setLineWidth(0.3);doc.roundedRect(M,y,W-2*M,15,2,2,'S');
+  [['Presupuesto',fmt(t.monto,t.moneda),tinta],['Cobrado a la fecha',fmt(st.cobrado,t.moneda),[31,138,76]],
+   [st.saldo>0?'Saldo pendiente':'Saldo',st.saldo>0?fmt(st.saldo,t.moneda):'CANCELADO',st.saldo>0?[179,38,30]:[31,138,76]]].forEach(([l,v,cl],i)=>{
+    const x=M+cw*i+cw/2;doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...gris);doc.text(l,x,y+5.5,{align:'center'});
+    doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(...cl);doc.text(v,x,y+11.2,{align:'center'});
+    if(i)doc.line(M+cw*i,y+3,M+cw*i,y+12)});
+  // firma
+  const fy=184;doc.setDrawColor(...tinta);doc.setLineWidth(0.3);doc.line(W-M-55,fy,W-M,fy);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...gris);doc.text('Firma y aclaración',W-M-27.5,fy+4.5,{align:'center'});
+  doc.setFont('helvetica','italic');doc.setFontSize(9.5);doc.setTextColor(...col);doc.text('¡Gracias por su pago!',M,fy);
+  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(160,160,165);doc.text('Documento no válido como factura',W/2,201,{align:'center'});
+  const nombre=`Recibo ${t.empresa}-${N} ${t.cliente}.pdf`.replace(/[\\/:*?"<>|]/g,'');
+  const blob=doc.output('blob');
+  return{blob,nombre,file:new File([blob],nombre,{type:'application/pdf'}),N,
+    texto:`Hola ${t.cliente}! Te enviamos el recibo N° ${t.empresa}-${N} por ${fmt(c.monto,c.moneda)}. ¡Gracias! ${EMPN[t.empresa]}`}}
+let REC=null;
+async function abrirRecibo(tid,cid,recien){
+  const t=DB.trabajos.find(x=>x.id===tid),c=t&&t.cobros.find(x=>x.id===cid);if(!c)return;
+  REC=null;$('recTit').textContent=recien?'Cobro registrado ✓':'Recibo de cobro';
+  $('recInfo').innerHTML=`<div class="recprev"><img src="${LOGO[t.empresa]}" alt=""><div><div class="small">Recibo para</div><b>${esc(t.cliente)}</b>
+    <div class="recmonto">${fmt(c.monto,c.moneda)}</div><div class="small">${fdate(c.fecha)} · ${c.medio}</div></div></div>
+    <div class="hint" id="recEstado" style="margin-top:12px">Generando el PDF…</div>`;
+  ['btnRecDes','btnRecWa'].forEach(b=>$(b).disabled=true);cerrar('ovDet');abrir('ovRec');
+  try{REC=await generarRecibo(t,c);$('recEstado').innerHTML=`Recibo <b>N° ${t.empresa}-${REC.N}</b> listo. Tocá <b>Enviar por WhatsApp</b> y elegí el chat del cliente.`;
+    ['btnRecDes','btnRecWa'].forEach(b=>$(b).disabled=false)}
+  catch(e){$('recEstado').innerHTML=`<span style="color:var(--bad)">${esc(e.message)}</span>`}}
+function descargarRecibo(){if(!REC)return;descargar(REC.nombre,REC.blob,'application/pdf');toast('Recibo descargado')}
+async function enviarRecibo(){if(!REC)return;
+  if(navigator.canShare&&navigator.canShare({files:[REC.file]})){
+    try{await navigator.share({files:[REC.file],title:REC.nombre});return}catch(e){if(e.name==='AbortError')return}}
+  descargar(REC.nombre,REC.blob,'application/pdf');
+  window.open('https://wa.me/?text='+encodeURIComponent(REC.texto),'_blank');
+  toast('Se descargó el PDF: adjuntalo en el chat de WhatsApp')}
 
 /* ---------- DETALLE ---------- */
 let detId=null;
@@ -759,7 +882,7 @@ function verDetalle(id){detId=id;
     <h4 style="margin:0 0 8px">Cobros</h4>
     <div class="tbl-wrap" style="border:1px solid var(--line);border-radius:10px"><table><thead><tr><th>Fecha</th><th>Medio</th><th class="num">Monto</th><th class="num">Cotiz.</th><th class="num">Imputado</th><th></th></tr></thead><tbody>
     ${cobs.length?cobs.map(x=>`<tr><td>${fdate(x.fecha)}${x.nota?`<div class="small">${esc(x.nota)}</div>`:''}</td><td>${medioH(x.medio)}</td><td class="num">${fmt(x.monto,x.moneda)}</td><td class="num">${x.cot?fmt(x.cot,'ARS'):'—'}</td><td class="num">${fmt(imputado(x,t.moneda),t.moneda)}</td>
-      <td class="num"><button class="btn sm danger" onclick="borrarCobro('${t.id}','${x.id}')" title="Eliminar cobro">${I('trash')}<span>Eliminar</span></button></td></tr>`).join(''):`<tr><td colspan="6" class="empty">Todavía no se registraron cobros</td></tr>`}
+      <td class="num"><div class="acts"><button class="btn sm wa" onclick="abrirRecibo('${t.id}','${x.id}')" title="Recibo">${I('receipt')}<span>Recibo${x.nroRecibo?' '+String(x.nroRecibo).padStart(4,'0'):''}</span></button><button class="btn sm danger" onclick="borrarCobro('${t.id}','${x.id}')" title="Eliminar cobro">${I('trash')}<span>Eliminar</span></button></div></td></tr>`).join(''):`<tr><td colspan="6" class="empty">Todavía no se registraron cobros</td></tr>`}
     </tbody></table></div>`;
   $('detEdit').onclick=()=>abrirTrabajo(id); $('detCob').onclick=()=>abrirCobro(id); $('detCob').classList.toggle('hide',c.pend<=0);
   abrir('ovDet');
@@ -807,6 +930,7 @@ function entrar(user){USUARIO=nombreDe(user.email);$('login').classList.add('hid
     e=>toast('Error leyendo datos: '+(e.code||e.message)))}
 function salir(){if(unsub){unsub();unsub=null}DB.trabajos=[];render();FB.salir()}
 ['lUser','lPass'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')ingresar()}));
+if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 window.fbListo=()=>FB.alCambiarSesion(u=>{if(u)entrar(u);else{modoLogin();$('login').classList.remove('hide')}});
 if(window.FB)window.fbListo();
 </script>
